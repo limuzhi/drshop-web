@@ -28,7 +28,7 @@
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
-          ></el-date-picker>
+          />
         </el-form-item>
         <el-form-item>
           <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">查询</el-button>
@@ -37,7 +37,7 @@
           <el-button v-permisaction="['systeam:menu:add']" :loading="loading" icon="el-icon-plus" type="warning" @click="create">新增</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button v-permisaction="['systeam:menu:delete']"  :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">批量删除</el-button>
+          <el-button v-permisaction="['systeam:menu:delete']" :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">批量删除</el-button>
         </el-form-item>
       </el-form>
 
@@ -47,25 +47,25 @@
         <el-table-column align="center" prop="username" label="用户账号" />
         <el-table-column align="center" prop="nickname" label="用户昵称" />
         <el-table-column label="部门" align="center" prop="deptInfo.deptName" :show-overflow-tooltip="true" />
-        <el-table-column label="角色" align="center" prop="roles" :show-overflow-tooltip="true" >
+        <el-table-column label="角色" align="center" prop="roles" :show-overflow-tooltip="true">
           <template slot-scope="scope">
-              <span v-for="(item,index) of scope.row.roles" :key="index">   {{item.name}}   </span>
+            <span v-for="(item,index) of scope.row.roles" :key="index">   {{ item.name }}   </span>
           </template>
         </el-table-column>
-        <el-table-column label="岗位" align="center" prop="posts" :show-overflow-tooltip="true" >
+        <el-table-column label="岗位" align="center" prop="posts" :show-overflow-tooltip="true">
           <template slot-scope="scope">
-              <span v-for="(item,index) of scope.row.posts" :key="index">   {{item.postCode}}/{{item.postName}}   </span>
+            <span v-for="(item,index) of scope.row.posts" :key="index">   {{ item.postCode }}/{{ item.postName }}   </span>
           </template>
         </el-table-column>
         <el-table-column align="center" prop="mobile" label="手机号" />
-        <el-table-column align="center" label="状态" >
+        <el-table-column align="center" label="状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
-               :active-value="2"
-               :inactive-value="1"
+              :active-value="2"
+              :inactive-value="1"
               @change="handleStatusChange(scope.row)"
-            ></el-switch>
+            />
           </template>
         </el-table-column>
         <el-table-column align="center" prop="remark" label="说明" />
@@ -73,11 +73,11 @@
         <el-table-column fixed="right" label="操作" align="center" width="120">
           <template slot-scope="scope">
             <el-tooltip content="编辑" effect="dark" placement="top">
-              <el-button  v-permisaction="['systeam:menu:edit']" size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
+              <el-button v-permisaction="['systeam:menu:edit']" size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
             </el-tooltip>
-            <el-tooltip  class="delete-popover" content="删除" effect="dark" placement="top">
+            <el-tooltip class="delete-popover" content="删除" effect="dark" placement="top">
               <el-popconfirm title="确定删除吗？" @onConfirm="singleDelete(scope.row.userId)">
-                <el-button v-permisaction="['systeam:menu:delete']" slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
+                <el-button slot="reference" v-permisaction="['systeam:menu:delete']" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
           </template>
@@ -98,21 +98,21 @@
 
       <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible" width="50%">
         <el-form ref="dialogForm" size="small" :model="dialogFormData" :rules="dialogFormRules" label-width="100px">
-          <el-row> 
+          <el-row>
             <el-col :span="12">
-                <el-form-item label="用户昵称" prop="nickname">
-                  <el-input v-model.trim="dialogFormData.nickname" placeholder="用户昵称" />
-                </el-form-item>
+              <el-form-item label="用户昵称" prop="nickname">
+                <el-input v-model.trim="dialogFormData.nickname" placeholder="用户昵称" />
+              </el-form-item>
             </el-col>
-             <el-col :span="12">
+            <el-col :span="12">
               <el-form-item label="归属部门" prop="deptId">
-                <el-select v-model="dialogFormData.deptId"  placeholder="请选择">
+                <el-select v-model="dialogFormData.deptId" placeholder="请选择">
                   <el-option
                     v-for="item in deptOptions"
                     :key="item.deptId"
                     :label="item.deptName"
-                    :value="item.deptId"  
-                  ></el-option>
+                    :value="item.deptId"
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
@@ -122,10 +122,10 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-               <el-form-item label="邮箱" prop="email">
+              <el-form-item label="邮箱" prop="email">
                 <el-input v-model.trim="dialogFormData.email" placeholder="请输入邮箱" maxlength="50" />
-               </el-form-item>
-            </el-col>   
+              </el-form-item>
+            </el-col>
             <el-col :span="12">
               <el-form-item v-if="dialogFormData.userId == undefined" label="用户账号" prop="username">
                 <el-input ref="password" v-model.trim="dialogFormData.username" placeholder="用户账号" />
@@ -138,7 +138,7 @@
                   <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
                 </span>
               </el-form-item>
-            </el-col>  
+            </el-col>
             <el-col :span="12">
               <el-form-item label="状态" prop="status">
                 <el-radio-group v-model.trim="dialogFormData.status">
@@ -146,10 +146,10 @@
                     v-for="dict in statusOptions"
                     :key="dict.dictValue"
                     :label="dict.dictValue"
-                  >{{dict.dictLabel}}</el-radio>
+                  >{{ dict.dictLabel }}</el-radio>
                 </el-radio-group>
               </el-form-item>
-            </el-col>  
+            </el-col>
             <el-col :span="12">
               <el-form-item label="用户性别">
                 <el-select v-model="dialogFormData.sex" placeholder="请选择">
@@ -158,10 +158,10 @@
                     :key="dict.dictValue"
                     :label="dict.dictLabel"
                     :value="dict.dictValue"
-                  ></el-option>
+                  />
                 </el-select>
               </el-form-item>
-            </el-col> 
+            </el-col>
             <el-col :span="12">
               <el-form-item label="岗位">
                 <el-select v-model="dialogFormData.postIds" multiple placeholder="请选择">
@@ -170,10 +170,10 @@
                     :key="item.postId"
                     :label="item.postName"
                     :value="item.postId"
-                  ></el-option>
+                  />
                 </el-select>
               </el-form-item>
-            </el-col>  
+            </el-col>
             <el-col :span="12">
               <el-form-item label="角色">
                 <el-select v-model="dialogFormData.roleIds" multiple placeholder="请选择">
@@ -182,7 +182,7 @@
                     :key="item.roleId"
                     :label="item.name"
                     :value="item.roleId"
-                  ></el-option>
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
@@ -192,18 +192,18 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-               <el-form-item label="用户类型">
-                  <el-radio-group v-model="dialogFormData.isAdmin">
-                    <el-radio
-                      :label="1"
-                    >后台管理员</el-radio>
-                     <el-radio
-                      :label="0"
-                    >前台用户</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-             </el-col>
-           </el-row>
+              <el-form-item label="用户类型">
+                <el-radio-group v-model="dialogFormData.isAdmin">
+                  <el-radio
+                    :label="1"
+                  >后台管理员</el-radio>
+                  <el-radio
+                    :label="0"
+                  >前台用户</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button size="mini" @click="cancelForm()">取 消</el-button>
@@ -216,7 +216,7 @@
 </template>
 
 <script>
-import { encrypt } from '@/utils/jsencrypt'
+// import { encrypt } from '@/utils/jsencrypt'
 import { getUsers, createUser, updateUserById, batchDeleteUserByIds, changeUserStatus, getPostAndRoleList } from '@/api/system/user'
 
 export default {
@@ -270,20 +270,20 @@ export default {
       dialogType: '',
       dialogFormVisible: false,
       dialogFormData: {
-        userId:undefined,
+        userId: undefined,
         username: '',
         deptId: undefined,
         password: '',
         nickname: '',
         mobile: '',
-        email:undefined,
-        sex:undefined,
-        status: "2",
+        email: undefined,
+        sex: undefined,
+        status: '2',
         avatar: '',
         remark: undefined,
         postIds: [],
         roleIds: [],
-        isAdmin:1,
+        isAdmin: 1
       },
       dialogFormRules: {
         username: [
@@ -294,19 +294,19 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
-         deptId: [
-          { required: true, message: "归属部门不能为空", trigger: "blur" }
+        deptId: [
+          { required: true, message: '归属部门不能为空', trigger: 'blur' }
         ],
         nickname: [
           { required: true, message: '请输入昵称', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
-         email: [
-          { required: true, message: "邮箱地址不能为空", trigger: "blur" },
+        email: [
+          { required: true, message: '邮箱地址不能为空', trigger: 'blur' },
           {
-            type: "email",
+            type: 'email',
             message: "'请输入正确的邮箱地址",
-            trigger: ["blur", "change"]
+            trigger: ['blur', 'change']
           }
         ],
         mobile: [
@@ -367,20 +367,19 @@ export default {
     },
     // 用户状态修改
     handleStatusChange(row) {
-      let text = row.status === 2 ? "启用" : "停用";
-      this.$confirm('确认要"' + text + '"："' + row.username + '"用户吗?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
-          return changeUserStatus(row.userId, row.status);
-        }).then(() => {
-            this.msgSuccess(text + "成功");
-        }).catch(function() {
-            row.status = row.status === 1 ? 2 : 1;
-        });
+      const text = row.status === 2 ? '启用' : '停用'
+      this.$confirm('确认要"' + text + '"："' + row.username + '"用户吗?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(function() {
+        return changeUserStatus(row.userId, row.status)
+      }).then(() => {
+        this.msgSuccess(text + '成功')
+      }).catch(function() {
+        row.status = row.status === 1 ? 2 : 1
+      })
     },
-
 
     // 新增
     create() {
@@ -390,42 +389,40 @@ export default {
     },
 
     // 修改
-    update(row) { 
+    update(row) {
       this.dialogFormData.userId = row.userId
       this.dialogFormData.username = row.username
-      this.dialogFormData.password = '' 
-      this.dialogFormData.deptId =  row.deptId 
-      
-      this.dialogFormData.nickname = row.nickname 
+      this.dialogFormData.password = ''
+      this.dialogFormData.deptId = row.deptId
+
+      this.dialogFormData.nickname = row.nickname
       this.dialogFormData.mobile = row.mobile
       this.dialogFormData.email = row.email
       this.dialogFormData.sex = undefined
-      if (row.sex != undefined ) {
-        this.dialogFormData.sex = "" + row.sex
+      if (row.sex) {
+        this.dialogFormData.sex = '' + row.sex
       }
-      
-      console.log('sex:',this.dialogFormData.sex,"===",row.sex)
-      this.dialogFormData.status = "" + row.status
+
+      this.dialogFormData.status = '' + row.status
       this.dialogFormData.avatar = row.avatar
       this.dialogFormData.isAdmin = row.isAdmin
       this.dialogFormData.remark = row.remark
       this.dialogFormData.roleIds = []
-      if(row.roles){
-          row.roles.forEach(item=>{
-            this.dialogFormData.roleIds.push(item.roleId)
+      if (row.roles) {
+        row.roles.forEach(item => {
+          this.dialogFormData.roleIds.push(item.roleId)
         })
       }
       this.dialogFormData.postIds = []
-      if(row.posts){
-          row.posts.forEach(item=>{
-            this.dialogFormData.postIds.push(item.postId)
+      if (row.posts) {
+        row.posts.forEach(item => {
+          this.dialogFormData.postIds.push(item.postId)
         })
-      } 
+      }
       this.dialogFormTitle = '修改用户'
       this.dialogType = 'update'
       this.passwordType = 'password'
-      this.dialogFormVisible = true 
-
+      this.dialogFormVisible = true
     },
 
     // 提交表单
@@ -435,11 +432,11 @@ export default {
           this.submitLoading = true
 
           this.dialogFormDataCopy = { ...this.dialogFormData }
-          if (this.dialogFormData.password !== '') {
-            //加密密码
-            const encPassword = encrypt(this.dialogFormData.password)
-            this.dialogFormDataCopy.password = encPassword
-          }
+          // if (this.dialogFormData.password !== '') {
+          //   // 加密密码
+          //   // const encPassword = encrypt(this.dialogFormData.password)
+          //   // this.dialogFormDataCopy.password = encPassword
+          // }
           let msg = ''
           try {
             if (this.dialogType === 'create') {
@@ -481,20 +478,20 @@ export default {
       this.dialogFormVisible = false
       this.$refs['dialogForm'].resetFields()
       this.dialogFormData = {
-          userId:undefined,
-          username: '',
-          deptId: undefined,
-          password: '',
-          nickname: '',
-          mobile: '',
-          email:undefined,
-          sex:undefined,
-          status: "2",
-          avatar: '',
-          remark: undefined,
-          postIds: [],
-          roleIds: [],
-          isAdmin:1,
+        userId: undefined,
+        username: '',
+        deptId: undefined,
+        password: '',
+        nickname: '',
+        mobile: '',
+        email: undefined,
+        sex: undefined,
+        status: '2',
+        avatar: '',
+        remark: undefined,
+        postIds: [],
+        roleIds: [],
+        isAdmin: 1
       }
     },
 
@@ -507,7 +504,7 @@ export default {
       }).then(async res => {
         this.loading = true
         const userIds = []
-        console.log('multipleSelection==',this.multipleSelection)
+        console.log('multipleSelection==', this.multipleSelection)
         this.multipleSelection.forEach(x => {
           userIds.push(x.userId)
         })
