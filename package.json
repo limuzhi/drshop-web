@@ -1,8 +1,8 @@
 {
-  "name": "drshop-web",
+  "name": "go-web-mini-ui",
   "version": "1.0.0",
-  "description": "drshop-web前端项目",
-  "author": "limuzhi <1754732290@qq.com>",
+  "description": "go-web-mini前端项目",
+  "author": "liming <764995901@qq.com>",
   "scripts": {
     "dev": "vue-cli-service serve",
     "lint": "eslint --ext .js,.vue src",
